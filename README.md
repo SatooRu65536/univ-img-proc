@@ -40,7 +40,7 @@ includePath に `/opt/homebrew/**` を追加する
 
 ### コンパイル
 ```shell
-g++ -O3 $1 -std=c++11 `pkg-config --cflags --libs opencv4`
+g++ [filePath] -O3 -std=c++11 `pkg-config --cflags --libs opencv4`
 ```
 
 ### 実行
@@ -63,5 +63,5 @@ alias gpp='(){g++ -O3 $1 -std=c++11 `pkg-config --cflags --libs opencv4` && ./a.
 ### 実行
 楽にコンパイル&実行することができます
 ```shell
-gpp ./main.cpp
+gpp [filePath]
 ```
