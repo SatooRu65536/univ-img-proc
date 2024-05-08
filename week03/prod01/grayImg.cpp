@@ -27,9 +27,14 @@ int main(int argc, const char* argv[]) {
       gray_img.at<uchar>(y, x) = val;
     }
   }
-  /* 後で記入 */
+
+  cv::Mat dst_img;
+  cv::cvtColor(src_img, dst_img, cv::COLOR_BGR2GRAY);
+
   cv::imshow(WINDOW_NAME_INPUT, src_img);    // 入力画像の表示
   cv::imshow(WINDOW_NAME_OUTPUT, gray_img);  // 出力画像の表示
-  cv::waitKey();                             // キー入力待ち (止める)
+  cv::imshow(WINDOW_NAME_OUTPUT2, dst_img);  // 出力画像の表示
+
+  cv::waitKey();  // キー入力待ち (止める)
   return 0;
 }
