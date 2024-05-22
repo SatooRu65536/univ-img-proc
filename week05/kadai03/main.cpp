@@ -44,6 +44,7 @@ int main(int argc, const char* argv[]) {
   }
 
   cv::imshow("output", dst_img);
+  cv::imwrite("output.jpg", dst_img);
   cv::waitKey(0);
 
   return 0;

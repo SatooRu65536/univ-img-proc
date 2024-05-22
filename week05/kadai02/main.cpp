@@ -53,7 +53,7 @@ int main(int argc, const char* argv[]) {
     for (int j = 0; j < hist[i] / 10; j++) {
       printf("◻︎");
       if (j > 100) {
-        printf(" +\n");
+        printf(" +");
         break;
       }
     }
