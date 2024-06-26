@@ -1,10 +1,10 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
-#define FILE_NAME "./moon-is-kirei.jpg"
+#define FILE_NAME "./ham.jpg"
 
 int main(int argc, const char* argv[]) {
-  cv::Mat src_img = cv::imread(FILE_NAME, 0);
+  cv::Mat src_img = cv::imread(FILE_NAME, cv::IMREAD_COLOR);
 
   // 読み込み失敗の場合
   if (src_img.empty()) {
@@ -12,15 +12,17 @@ int main(int argc, const char* argv[]) {
     return (-1);
   }
 
-  cv::Mat dst_gaussian_img = cv::Mat(src_img.size(), CV_8UC1);
-  cv::Mat tmp_img;
-  cv::Mat dst_img = cv::Mat(src_img.size(), CV_8UC1);
+  // 輝度値の画像
+  cv::Mat gray_img = cv::Mat(src_img.size(), CV_8UC1);
+  cv::cvtColor(src_img, gray_img, cv::COLOR_BGR2GRAY);
+
+  cv::Mat dst_gaussian_img, tmp_img, dst_img;
 
   // ガウシアンフィルター処理
-  cv::GaussianBlur(src_img, dst_gaussian_img, cv::Size(3, 3), 0);
+  cv::GaussianBlur(gray_img, dst_gaussian_img, cv::Size(3, 3), 0);
 
-  // ソーベルフィルター
-  cv::Sobel(dst_gaussian_img, tmp_img, CV_32F, 1, 0);
+  // ソーベルフィルター(縦方向)
+  cv::Sobel(dst_gaussian_img, tmp_img, CV_32F, 0, 1);
 
   cv::convertScaleAbs(tmp_img, dst_img);
 
