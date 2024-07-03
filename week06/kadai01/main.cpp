@@ -26,6 +26,7 @@ int main(int argc, const char* argv[]) {
 
   cv::convertScaleAbs(tmp_img, dst_img);
 
+  cv::imshow("input", src_img);
   cv::imshow("gaussian", dst_gaussian_img);
   cv::imshow("gaussian + sobel", dst_img);
   cv::waitKey(0);

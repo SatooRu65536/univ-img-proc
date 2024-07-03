@@ -93,5 +93,6 @@
         "__bit_reference": "cpp",
         "__verbose_abort": "cpp",
         "ios": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
