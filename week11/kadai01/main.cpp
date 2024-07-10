@@ -1,19 +1,12 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#define FILE_NAME "fruit_image.jpg"
+#define FILE_NAME "hand.jpg"
 
 // ウィンドウ名
 #define WINDOW_NAME_INPUT "input"
 #define WINDOW_NAME_OUTPUT "output"
 
-// 0. 定数の定義
-#define HUE_DIFF (90)  // Hの変化量
-#define SAT_DIFF (50)  // Sの変化量
-#define VAL_DIFF (50)  // Vの変化量
-#define HUE_MIN (0)    // Hの最小値
-#define HUE_MAX (180)  // Hの最大値（シフト幅）
-#define SAT_MIN (0)    // Sの最小値
-#define VAL_MIN (0)    // Vの最小値
+#define H_MIN (14)
 
 int main(int argc, const char* argv[]) {
   // 1. 変数の宣言
@@ -36,10 +29,11 @@ int main(int argc, const char* argv[]) {
       h = p[0];
       s = p[1];
       v = p[2];
-      v -= VAL_DIFF;      // 明度を下げる
-      if (v < VAL_MIN) {  // 下限を超えた場合は修正
-        v = VAL_MIN;
+
+      if (h <= H_MIN) {
+        h = H_MIN;
       }
+
       p[0] = h;
       p[1] = s;
       p[2] = v;  // 変更後の値を格納
@@ -51,6 +45,7 @@ int main(int argc, const char* argv[]) {
   // 6. 表示
   cv::imshow(WINDOW_NAME_INPUT, src_img);   // 入力画像の表示
   cv::imshow(WINDOW_NAME_OUTPUT, dst_img);  // 出力画像の表示
+  cv::imwrite("output.jpg", dst_img);       // 出力画像の保存
   cv::waitKey();                            // キー入力待ち (止める)
   return 0;
 }
