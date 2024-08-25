@@ -2,7 +2,7 @@
 #include <opencv2/opencv.hpp>
 
 #define FILE_NAME "./apple_grayscale.jpg"
-#define FILTER_SIZE 3
+#define FILTER_SIZE 21
 
 int main(int argc, const char* argv[]) {
   cv::Mat src_img = cv::imread(FILE_NAME, 0);
@@ -36,6 +36,7 @@ int main(int argc, const char* argv[]) {
   cv::filter2D(src_img, dst_img, -1, kernel);
 
   cv::imshow("output", dst_img);
+  cv::imshow("input", src_img);
   cv::imwrite("output.jpg", dst_img);
   cv::waitKey(0);
 
